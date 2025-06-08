@@ -30,8 +30,9 @@ function saveNotes() {
   fs.writeFileSync(DATA_FILE, JSON.stringify(notes, null, 2));
 }
 
-app.listen(3000, () => {
-  console.log("Server đang chạy ở http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server đang chạy ở cổng ${PORT}`);
 });
 
 app.get("/notes", (req, res) => {
