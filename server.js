@@ -1,11 +1,11 @@
-const path = require("path"); // <-- dòng này bị đặt sau const DATA_FILE
+const path = require("path");
 const cors = require("cors");
-app.use(cors());
-
 const fs = require("fs");
 const express = require("express");
 
-const app = express();
+const app = express(); // <-- khai báo app trước
+
+app.use(cors()); // <-- gọi use sau khi đã có app
 app.use(express.json());
 app.use(express.static("public"));
 
