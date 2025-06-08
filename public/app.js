@@ -1,22 +1,31 @@
+document
+  .getElementById("noteForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Chặn reload trang
+    sendNote();
+  });
+
 function sendNote() {
-  const input = document.getElementById("noteContent"); // khai báo input
-  const content = input.value.trim(); // lấy nội dung từ ô input
-  fetch("http://localhost:3000/notes", {
+  const input = document.getElementById("noteContent");
+  const content = input.value.trim();
+
+  if (!content) {
+    alert("Nội dung ghi chú không được để trống!");
+    return;
+  }
+
+  fetch("/notes", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ content }),
   })
     .then((res) => res.json())
     .then((data) => {
       alert("Ghi chú đã được thêm: " + JSON.stringify(data));
-      input.value = ""; // Xóa input sau khi thêm
+      input.value = "";
       loadNotes();
     })
-    .catch((err) => {
-      alert("Lỗi: " + err);
-    });
+    .catch((err) => alert("Lỗi: " + err));
 }
 
 function loadNotes() {
