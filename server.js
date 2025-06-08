@@ -1,4 +1,6 @@
 const path = require("path"); // <-- dòng này bị đặt sau const DATA_FILE
+const cors = require("cors");
+app.use(cors());
 
 const fs = require("fs");
 const express = require("express");
@@ -33,6 +35,7 @@ function saveNotes() {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server đang chạy ở cổng ${PORT}`);
+  console.log("PORT:", process.env.PORT);
 });
 
 app.get("/notes", (req, res) => {
